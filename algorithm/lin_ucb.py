@@ -7,10 +7,7 @@ class LinUCBAlgorithm(BaseAlgorithm):
     def __init__(self, K, d, alpha=0.2):
         self.K = K
         self.b = np.zeros((self.K, d))
-        self.A = np.zeros((self.K, d, d))
-
-        for a in range(self.K):
-            self.A[a] = np.identity(d)
+        self.A = np.array([np.identity(d) for a in range(K)])
 
         self.th_hat = np.zeros((self.K, d))
         self.alpha = alpha
