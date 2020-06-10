@@ -8,8 +8,8 @@ class EpsilonGreedyAlgorithm(BaseAlgorithm):
     def __init__(self, n_arms, epsilon):
         self.n_arms = n_arms
         self.epsilon = epsilon
-        self.values = [0.0 for i in range(n_arms)]
-        self.n_draws = [0 for i in range(n_arms)]
+        self.values = np.zeros(n_arms)
+        self.n_draws = np.zeros(n_arms)
 
     def select(self):
         if self.epsilon > random.random():
