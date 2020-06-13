@@ -1,6 +1,6 @@
 import random
 
-from algorithm import GreedyAlgorithm, EpsilonGreedyAlgorithm, UCBAlgorithm
+from algorithm import GreedyAlgorithm, EpsilonGreedyAlgorithm, UCBAlgorithm, TSAlgorithm
 from arm import BernoulliArm
 
 
@@ -31,6 +31,17 @@ def main():
     print("{}: {}".format(algo, rewards))
 
     algo = UCBAlgorithm(len(arms))
+    rewards = 0
+    for i in range(NUMBER_OF_ITERS):
+        n = algo.select()
+        reward = arms[n].draw()
+        algo.update(n, reward)
+        rewards += reward
+
+    print("{}: {}".format(algo, rewards))
+
+
+    algo = TSAlgorithm(len(arms))
     rewards = 0
     for i in range(NUMBER_OF_ITERS):
         n = algo.select()
