@@ -11,18 +11,14 @@ class TSAlgorithm(BaseAlgorithm):
         self.n = np.zeros(n_arms)
         self.m = np.zeros(n_arms)
 
-        self.n_draws = np.zeros(n_arms)
-
     def select(self):
-        theta = np.random.beta(a=self.n + self.alpha, b=self.m + self.beta)
+        theta = np.random.beta(a=self.m + self.alpha, b=self.n - self.m + self.beta)
         return np.argmax(theta)
 
     def update(self, arm_num, reward):
+        self.n[arm_num] += 1
         if reward:
-            self.n[arm_num] += 1
-        else:
             self.m[arm_num] += 1
-        self.n_draws[arm_num] += 1
 
     def __str__(self):
         return 'ThompsonSampling'
